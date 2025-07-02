@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 # Walking vars
 @export var walk_speed = 300.0
-@export var run_speed = 500.0
+@export var run_speed = 600.0
 @export_range(0,1) var deceleration = 0.1
 @export_range(0,1) var acceleartion = 0.08
 
