@@ -8,6 +8,8 @@ class_name GroundState
 @export var jump_animation : String = "jump"
 @export var falling_animation : String = "falling"
 
+@export var sfx_jump : AudioStreamPlayer2D
+
 @export var air_state : State
 
 func state_input(event : InputEvent):
@@ -24,3 +26,4 @@ func jump(event : InputEvent):
 	character.velocity.y = jump_velocity
 	next_state = air_state
 	playback.travel(jump_animation)
+	sfx_jump.play()

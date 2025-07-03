@@ -9,6 +9,8 @@ class_name AirState
 @export var has_second_jump : bool = true
 @export var second_jump_animation : String = "second_jump"
 
+@export var sfx_jump : AudioStreamPlayer2D
+
 @export var landing_state : State
 
 func state_input(event : InputEvent):
@@ -35,3 +37,4 @@ func second_jump():
 	character.velocity.y = second_jump_velocity
 	playback.travel(second_jump_animation)
 	has_second_jump = false
+	sfx_jump.play()
