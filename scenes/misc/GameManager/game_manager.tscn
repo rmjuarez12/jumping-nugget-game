@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://dj62ocrcpn40d"]
+
+[ext_resource type="Script" uid="uid://c2bj61gsmtoal" path="res://scenes/misc/GameManager/scripts/game_manager.gd" id="1_ew5cr"]
+[ext_resource type="Texture2D" uid="uid://dnx34d0wyrkul" path="res://scenes/misc/GameManager/assets/death-icon.png" id="2_u0ojc"]
+[ext_resource type="FontFile" uid="uid://66qim4euxbya" path="res://assets/fonts/Silver.ttf" id="3_uwctd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uwctd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ncw6m"]
+font = ExtResource("3_uwctd")
+font_size = 30
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_ew5cr")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="HUD"]
+offset_right = 327.0
+offset_bottom = 157.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_uwctd")
+
+[node name="DeathCounter" type="Node" parent="HUD/Panel"]
+
+[node name="Sprite2D" type="Sprite2D" parent="HUD/Panel/DeathCounter"]
+position = Vector2(35.5, 29.5)
+scale = Vector2(3, 3)
+texture = ExtResource("2_u0ojc")
+
+[node name="Label" type="Label" parent="HUD/Panel/DeathCounter"]
+offset_left = 58.5
+offset_top = 18.5
+offset_right = 98.5
+offset_bottom = 52.5
+text = "x 0"
+label_settings = SubResource("LabelSettings_ncw6m")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bajl11amou3qx"]
+[gd_scene load_steps=41 format=3 uid="uid://bajl11amou3qx"]
 
 [ext_resource type="Texture2D" uid="uid://bk88jmnkg64fb" path="res://scenes/characters/Player/assets/ChikBoy_idle.png" id="1_er4t8"]
 [ext_resource type="Script" uid="uid://qpepxg58gc8i" path="res://scenes/characters/Player/scripts/main_player.gd" id="1_v4v4q"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://bu77giitdc7c5" path="res://scenes/characters/Player/scripts/air_state.gd" id="6_gokpt"]
 [ext_resource type="Script" uid="uid://dh2jwc77l08me" path="res://scenes/characters/Player/scripts/landing_state.gd" id="7_pm167"]
 [ext_resource type="Script" uid="uid://bhvto7bx7fygc" path="res://scenes/characters/Player/scripts/state_label.gd" id="8_nallr"]
+[ext_resource type="Script" uid="uid://dkail536ce1c5" path="res://scenes/characters/Player/scripts/death_state.gd" id="10_t52f0"]
 [ext_resource type="AudioStream" uid="uid://b82wmslggygs0" path="res://scenes/characters/Player/assets/jump.wav" id="11_fc16w"]
 [ext_resource type="AudioStream" uid="uid://h5srw7rtv37v" path="res://scenes/characters/Player/assets/second_jump.wav" id="12_hoqnv"]
 
@@ -365,24 +366,29 @@ advance_mode = 2
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vsb63"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ny7dv"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_g1p3u"]
 states/Move/node = SubResource("AnimationNodeBlendSpace1D_k0rxn")
 states/Move/position = Vector2(391, 100)
 states/falling/node = SubResource("AnimationNodeAnimation_cwl3o")
-states/falling/position = Vector2(582.228, 6)
+states/falling/position = Vector2(631.228, 6)
 states/jump_start/node = SubResource("AnimationNodeAnimation_nmx1s")
 states/jump_start/position = Vector2(391, 6)
 states/landing/node = SubResource("AnimationNodeAnimation_fc16w")
-states/landing/position = Vector2(582.228, 100)
+states/landing/position = Vector2(631.228, 100)
 states/second_jump/node = SubResource("AnimationNodeAnimation_hoqnv")
-states/second_jump/position = Vector2(489.228, -80)
-transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_g1p3u"), "Move", "jump_start", SubResource("AnimationNodeStateMachineTransition_hoqnv"), "jump_start", "falling", SubResource("AnimationNodeStateMachineTransition_t52f0"), "falling", "landing", SubResource("AnimationNodeStateMachineTransition_2wa4j"), "landing", "Move", SubResource("AnimationNodeStateMachineTransition_hv8b0"), "jump_start", "second_jump", SubResource("AnimationNodeStateMachineTransition_qtvcq"), "second_jump", "falling", SubResource("AnimationNodeStateMachineTransition_hb1xg")]
-graph_offset = Vector2(-129.772, -148)
+states/second_jump/position = Vector2(511.228, -62)
+transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_g1p3u"), "Move", "jump_start", SubResource("AnimationNodeStateMachineTransition_hoqnv"), "jump_start", "falling", SubResource("AnimationNodeStateMachineTransition_t52f0"), "falling", "landing", SubResource("AnimationNodeStateMachineTransition_2wa4j"), "landing", "Move", SubResource("AnimationNodeStateMachineTransition_hv8b0"), "jump_start", "second_jump", SubResource("AnimationNodeStateMachineTransition_qtvcq"), "second_jump", "falling", SubResource("AnimationNodeStateMachineTransition_hb1xg"), "jump_start", "landing", SubResource("AnimationNodeStateMachineTransition_vsb63"), "second_jump", "landing", SubResource("AnimationNodeStateMachineTransition_ny7dv")]
+graph_offset = Vector2(-79.772, -97)
 
 [node name="MainPlayer" type="CharacterBody2D"]
 scale = Vector2(2, 2)
 floor_snap_length = 15.0
 script = ExtResource("1_v4v4q")
+run_speed = 450.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-15.5, -15.5)
@@ -402,10 +408,13 @@ tree_root = SubResource("AnimationNodeStateMachine_g1p3u")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Move/blend_position = -0.2
 
-[node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("player", "current_state", "animation_tree")]
+[node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("player", "current_state", "air_state", "death_state", "default_state", "animation_tree")]
 script = ExtResource("4_2dn10")
 player = NodePath("..")
 current_state = NodePath("Ground")
+air_state = NodePath("Air")
+death_state = NodePath("Death")
+default_state = NodePath("Landing")
 animation_tree = NodePath("../AnimationTree")
 
 [node name="Ground" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sfx_jump", "air_state")]
@@ -422,6 +431,10 @@ landing_state = NodePath("../Landing")
 [node name="Landing" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("ground_state")]
 script = ExtResource("7_pm167")
 ground_state = NodePath("../Ground")
+can_move = false
+
+[node name="Death" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("10_t52f0")
 can_move = false
 
 [node name="StateLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
