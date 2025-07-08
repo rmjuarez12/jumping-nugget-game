@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cg5qg1xgcvy3k"]
+
+[ext_resource type="Script" uid="uid://c2tmgsyuqfb3m" path="res://scenes/misc/Teleport/scripts/teleport.gd" id="1_24ki1"]
+[ext_resource type="PackedScene" uid="uid://c3wilnk480dq0" path="res://scenes/misc/TransitionFade/transition_fade.tscn" id="2_1exhd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_muem4"]
+
+[node name="Teleport" type="Area2D"]
+script = ExtResource("1_24ki1")
+transition_fade = ExtResource("2_1exhd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_muem4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

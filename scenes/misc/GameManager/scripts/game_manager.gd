@@ -10,7 +10,7 @@ extends Node
 @onready var player: Node = $"../MainPlayer"
 @onready var panel: Panel = $HUD/Panel
 @onready var all_gems: Node = $"../AllGems"
-@onready var checkpoint: Marker2D = $Checkpoint
+@onready var checkpoint: Marker2D = $"../Checkpoint"
 @onready var death_counter: Label = $HUD/Panel/DeathCounter/Label
 
 func _ready() -> void:
