@@ -13,6 +13,8 @@ class_name AirState
 var feather : Area2D
 
 @export var sfx_jump : AudioStreamPlayer2D
+@export var ghost_effect : GPUParticles2D
+@export var ghost_timer : Timer
 
 @export var landing_state : State
 
@@ -48,3 +50,9 @@ func second_jump():
 
 	has_second_jumped = true
 	feather.already_used = true
+
+	ghost_effect.emitting = true
+	ghost_timer.start()
+
+func _on_ghost_timer_timeout() -> void:
+	ghost_effect.emitting = false

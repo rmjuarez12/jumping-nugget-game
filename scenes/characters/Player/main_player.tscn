@@ -1,7 +1,8 @@
-[gd_scene load_steps=41 format=3 uid="uid://bajl11amou3qx"]
+[gd_scene load_steps=45 format=3 uid="uid://bajl11amou3qx"]
 
 [ext_resource type="Texture2D" uid="uid://bk88jmnkg64fb" path="res://scenes/characters/Player/assets/ChikBoy_idle.png" id="1_er4t8"]
 [ext_resource type="Script" uid="uid://qpepxg58gc8i" path="res://scenes/characters/Player/scripts/main_player.gd" id="1_v4v4q"]
+[ext_resource type="Texture2D" uid="uid://b1sgsn00u63i5" path="res://scenes/characters/Player/assets/double-jump-ghost.png" id="2_2wa4j"]
 [ext_resource type="Texture2D" uid="uid://dbhce0eow6y2v" path="res://scenes/characters/Player/assets/ChikBoy_run.png" id="3_g1p3u"]
 [ext_resource type="Script" uid="uid://y8qob2r07okx" path="res://scenes/characters/Player/scripts/player_state_machine.gd" id="4_2dn10"]
 [ext_resource type="Texture2D" uid="uid://dnwe6aeg3aed4" path="res://scenes/characters/Player/assets/ChikBoy_jump.png" id="4_cwl3o"]
@@ -13,6 +14,25 @@
 [ext_resource type="Script" uid="uid://dkail536ce1c5" path="res://scenes/characters/Player/scripts/death_state.gd" id="10_t52f0"]
 [ext_resource type="AudioStream" uid="uid://b82wmslggygs0" path="res://scenes/characters/Player/assets/jump.wav" id="11_fc16w"]
 [ext_resource type="AudioStream" uid="uid://h5srw7rtv37v" path="res://scenes/characters/Player/assets/second_jump.wav" id="12_hoqnv"]
+
+[sub_resource type="Curve" id="Curve_2wa4j"]
+_data = [Vector2(0, 0.797753), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hv8b0"]
+curve = SubResource("Curve_2wa4j")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qtvcq"]
+particle_flag_disable_z = true
+angle_min = -58.3
+angle_max = 87.4
+gravity = Vector3(0, 0, 0)
+scale_min = 1.5
+scale_max = 1.5
+color = Color(1, 0.772549, 0, 1)
+alpha_curve = SubResource("CurveTexture_hv8b0")
+hue_variation_min = -0.1
+hue_variation_max = 0.1
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_er4t8"]
 radius = 9.0
@@ -390,6 +410,12 @@ floor_snap_length = 15.0
 script = ExtResource("1_v4v4q")
 run_speed = 450.0
 
+[node name="DashParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 20
+texture = ExtResource("2_2wa4j")
+process_material = SubResource("ParticleProcessMaterial_qtvcq")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-15.5, -15.5)
 centered = false
@@ -423,9 +449,11 @@ jump_animation = "jump_start"
 sfx_jump = NodePath("../../sfx_jump")
 air_state = NodePath("../Air")
 
-[node name="Air" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sfx_jump", "landing_state")]
+[node name="Air" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sfx_jump", "ghost_effect", "ghost_timer", "landing_state")]
 script = ExtResource("6_gokpt")
 sfx_jump = NodePath("../../sfx_second_jump")
+ghost_effect = NodePath("../../DashParticles")
+ghost_timer = NodePath("../../GhostTimer")
 landing_state = NodePath("../Landing")
 
 [node name="Landing" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("ground_state")]
@@ -438,6 +466,7 @@ script = ExtResource("10_t52f0")
 can_move = false
 
 [node name="StateLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
+visible = false
 offset_left = -45.0
 offset_top = -37.0
 offset_right = 91.0
@@ -451,3 +480,8 @@ stream = ExtResource("11_fc16w")
 
 [node name="sfx_second_jump" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_hoqnv")
+
+[node name="GhostTimer" type="Timer" parent="."]
+wait_time = 0.8
+
+[connection signal="timeout" from="GhostTimer" to="PlayerStateMachine/Air" method="_on_ghost_timer_timeout"]
