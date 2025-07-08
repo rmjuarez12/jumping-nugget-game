@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://by50y6urqeftd"]
+
+[ext_resource type="Script" uid="uid://cgx5ba4hpo6wt" path="res://scenes/misc/CameraFocusChange/scripts/camera_focus_change.gd" id="1_ttcly"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_607ql"]
+
+[node name="CameraFocusChange" type="Area2D"]
+script = ExtResource("1_ttcly")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_607ql")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
