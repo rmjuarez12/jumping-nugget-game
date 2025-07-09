@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3baadr4uq3jp"]
+
+[ext_resource type="Script" uid="uid://bmfdjq8cfmfqp" path="res://scenes/misc/Spikes/scripts/spikes.gd" id="1_jwd1w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_33to2"]
+
+[node name="Spikes" type="Area2D" node_paths=PackedStringArray("sfx_death")]
+script = ExtResource("1_jwd1w")
+sfx_death = NodePath("sfx_death")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_33to2")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="sfx_death" type="AudioStreamPlayer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,11 +1,11 @@
 extends Area2D
 
 @export var teleport_destination: Marker2D
-@onready var checkpoint: Marker2D = get_node("/root/Stage1/Checkpoint")
+@onready var checkpoint: Marker2D = get_node("/root/Stage/Checkpoint")
 
 @export var transition_fade: PackedScene
 
-@onready var main_camera: Camera2D = get_node("/root/Stage1/MainCamera")
+@onready var main_camera: Camera2D = get_node("/root/Stage/MainCamera")
 @export var camera_limit_left: int
 @export var camera_limit_right: int
 @export var camera_limit_top: int

@@ -16,7 +16,7 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
-	if not is_on_floor():
+	if not is_on_floor() and state_machine.current_state.name != "Death" and not state_machine.current_state.disable_gravity:
 		velocity += get_gravity() * delta
 
 	# Move the character

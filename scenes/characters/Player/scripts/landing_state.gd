@@ -7,7 +7,7 @@ class_name LandingState
 
 @onready var all_feathers: Node = $"../../../AllFeathers"
 
-func state_process(delta):
+func state_process(_delta):
 	for feather in all_feathers.get_children():
 		feather.already_used = false
 
