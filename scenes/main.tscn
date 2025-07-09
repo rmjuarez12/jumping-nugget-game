@@ -1220,7 +1220,7 @@ position = Vector2(2688, 629)
 scale = Vector2(12.72, 1)
 
 [node name="MainPlayer" parent="." instance=ExtResource("3_sugp2")]
-position = Vector2(25, 286)
+position = Vector2(46, 286)
 
 [node name="MainCamera" type="Camera2D" parent="." node_paths=PackedStringArray("follow_target")]
 position = Vector2(25, 286)

@@ -586,6 +586,7 @@ sfx_death = NodePath("../../sfx_death")
 can_move = false
 
 [node name="StateLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
+visible = false
 offset_left = -45.0
 offset_top = -37.0
 offset_right = 91.0
