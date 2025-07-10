@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://dc5csc8imse48"
+path="res://.godot/imported/BlueFeather.dialogue-a37f1e6ea9251194d419ff2c2fea5d4d.tres"
+
+[deps]
+
+source_file="res://dialogues/BlueFeather.dialogue"
+dest_files=["res://.godot/imported/BlueFeather.dialogue-a37f1e6ea9251194d419ff2c2fea5d4d.tres"]
+
+[params]
+
+defaults=true

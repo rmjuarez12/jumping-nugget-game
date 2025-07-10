@@ -1,0 +1,130 @@
+[gd_scene load_steps=12 format=3 uid="uid://dvrr0juy7ywcw"]
+
+[ext_resource type="Texture2D" uid="uid://p4gsyqi5qjid" path="res://assets/backgrounds/rocky-tileset-background.png" id="1_s1vxw"]
+[ext_resource type="Texture2D" uid="uid://x2bpdeyabs04" path="res://assets/backgrounds/sunny-mountains-far-back.png" id="2_geb3y"]
+[ext_resource type="Texture2D" uid="uid://bo06ehdy1kyde" path="res://assets/backgrounds/middle.png" id="3_6lw5c"]
+[ext_resource type="Texture2D" uid="uid://b5mfm7x3g3n5k" path="res://assets/backgrounds/trees.png" id="4_h5k1u"]
+[ext_resource type="Script" uid="uid://1xgstyvhg2t6" path="res://scenes/misc/MainMenu/scripts/camera_2d.gd" id="5_geb3y"]
+[ext_resource type="Theme" uid="uid://dmy84rf2giojm" path="res://assets/main_menu.tres" id="6_6lw5c"]
+[ext_resource type="Script" uid="uid://b8l5af2344b3d" path="res://scenes/misc/MainMenu/scripts/main_menu.gd" id="6_h5k1u"]
+[ext_resource type="PackedScene" uid="uid://c3wilnk480dq0" path="res://scenes/misc/TransitionFade/transition_fade.tscn" id="7_vynkn"]
+[ext_resource type="Texture2D" uid="uid://cbmehhtgs7i1a" path="res://assets/logo.png" id="8_t1g1q"]
+[ext_resource type="AudioStream" uid="uid://cbustncmnxbxc" path="res://assets/music/magic cliffs.ogg" id="9_k5lfm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h5k1u"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Sky" type="ParallaxLayer" parent="ParallaxBackground"]
+scale = Vector2(4, 4)
+motion_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Sky"]
+position = Vector2(0, -42)
+texture = ExtResource("1_s1vxw")
+centered = false
+
+[node name="Mountains" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(0, -100)
+motion_scale = Vector2(0.2, 0.2)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Mountains"]
+offset_left = -6048.5
+offset_top = 189.0
+offset_right = 7498.5
+offset_bottom = 413.0
+texture = ExtResource("2_geb3y")
+stretch_mode = 1
+
+[node name="Trees2" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(0, -100)
+motion_scale = Vector2(0.3, 0.3)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Trees2"]
+offset_left = -6048.5
+offset_top = 319.0
+offset_right = 7498.5
+offset_bottom = 687.0
+texture = ExtResource("3_6lw5c")
+stretch_mode = 1
+
+[node name="Trees" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(0, -40)
+scale = Vector2(3, 3)
+motion_scale = Vector2(0.4, 0.4)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Trees"]
+offset_left = -2046.0
+offset_top = 136.0
+offset_right = 2719.0
+offset_bottom = 266.0
+texture = ExtResource("4_h5k1u")
+stretch_mode = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.5, 1.5)
+limit_left = 0
+script = ExtResource("5_geb3y")
+
+[node name="Menu" type="CanvasLayer" parent="." node_paths=PackedStringArray("start_button")]
+script = ExtResource("6_h5k1u")
+start_button = NodePath("Panel/VBoxContainer/StartGame")
+transition_fade = ExtResource("7_vynkn")
+
+[node name="Panel" type="Panel" parent="Menu"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_6lw5c")
+theme_override_styles/panel = SubResource("StyleBoxFlat_h5k1u")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -124.0
+offset_top = -34.0
+offset_right = 124.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="StartGame" type="Button" parent="Menu/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="Quit" type="Button" parent="Menu/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Quit
+"
+
+[node name="TextureRect" type="TextureRect" parent="Menu/Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -129.0
+offset_top = 24.0
+offset_right = 129.0
+offset_bottom = 282.0
+grow_horizontal = 2
+texture = ExtResource("8_t1g1q")
+expand_mode = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_k5lfm")
+volume_db = -5.0
+autoplay = true
+
+[connection signal="pressed" from="Menu/Panel/VBoxContainer/StartGame" to="Menu" method="_on_start_game_pressed"]
+[connection signal="pressed" from="Menu/Panel/VBoxContainer/Quit" to="Menu" method="_on_quit_pressed"]

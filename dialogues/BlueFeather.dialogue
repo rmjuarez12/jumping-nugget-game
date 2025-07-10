@@ -1,0 +1,9 @@
+~ start
+do DialogueState._stop_stage_timer()
+do DialogueState._manage_char_movement(false)
+Chickboy: Dayum, those spikes look scary!
+Chickboy: I wonder what will happen if I jump using that blue feather...
+Chickboy: Well, here goes nothing!
+do DialogueState._manage_char_movement(true)
+do DialogueState._start_stage_timer()
+=> END

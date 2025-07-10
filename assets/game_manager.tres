@@ -1,0 +1,40 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://c5x7iuq1ts4c1"]
+
+[ext_resource type="FontFile" uid="uid://66qim4euxbya" path="res://assets/fonts/Silver.ttf" id="1_jyusd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_84mim"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+bg_color = Color(0, 0, 0, 1)
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ncw6m"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+bg_color = Color(0, 0, 0, 1)
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w64xu"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+bg_color = Color(0, 0, 0, 0.384314)
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0.407843)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gwtes"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+bg_color = Color(1, 1, 1, 1)
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[resource]
+default_font = ExtResource("1_jyusd")
+default_font_size = 50
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/styles/focus = SubResource("StyleBoxFlat_84mim")
+Button/styles/hover = SubResource("StyleBoxFlat_ncw6m")
+Button/styles/normal = SubResource("StyleBoxFlat_w64xu")
+Button/styles/pressed = SubResource("StyleBoxFlat_gwtes")

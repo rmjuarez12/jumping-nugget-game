@@ -1,12 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://dj62ocrcpn40d"]
+[gd_scene load_steps=11 format=3 uid="uid://dj62ocrcpn40d"]
 
 [ext_resource type="Script" uid="uid://c2bj61gsmtoal" path="res://scenes/misc/GameManager/scripts/game_manager.gd" id="1_ew5cr"]
 [ext_resource type="Texture2D" uid="uid://dnx34d0wyrkul" path="res://scenes/misc/GameManager/assets/death-icon.png" id="2_u0ojc"]
 [ext_resource type="FontFile" uid="uid://66qim4euxbya" path="res://assets/fonts/Silver.ttf" id="3_uwctd"]
+[ext_resource type="Texture2D" uid="uid://ba3sr4sldc48j" path="res://scenes/misc/GameManager/assets/timer-icon.png" id="4_ncw6m"]
+[ext_resource type="Script" uid="uid://d1gdprlqyu80y" path="res://scenes/misc/GameManager/scripts/pause_menu.gd" id="5_w64xu"]
+[ext_resource type="Theme" uid="uid://c5x7iuq1ts4c1" path="res://assets/game_manager.tres" id="6_84mim"]
+[ext_resource type="AudioStream" uid="uid://cg6crq6vpcw3r" path="res://assets/pause_sfx.wav" id="7_84mim"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uwctd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ncw6m"]
+font = ExtResource("3_uwctd")
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_w64xu"]
 font = ExtResource("3_uwctd")
 font_size = 30
 
@@ -16,7 +24,7 @@ script = ExtResource("1_ew5cr")
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="Panel" type="Panel" parent="HUD"]
-offset_right = 327.0
+offset_right = 379.0
 offset_bottom = 157.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -36,3 +44,69 @@ offset_right = 98.5
 offset_bottom = 52.5
 text = "x 0"
 label_settings = SubResource("LabelSettings_ncw6m")
+
+[node name="Timer" type="Node" parent="HUD/Panel"]
+
+[node name="Sprite2D" type="Sprite2D" parent="HUD/Panel/Timer"]
+position = Vector2(129, 29)
+scale = Vector2(2, 2)
+texture = ExtResource("4_ncw6m")
+
+[node name="Label" type="Label" parent="HUD/Panel/Timer"]
+offset_left = 155.0
+offset_top = 18.0
+offset_right = 199.0
+offset_bottom = 52.0
+text = "00:00"
+label_settings = SubResource("LabelSettings_w64xu")
+
+[node name="PauseMenu" type="CanvasLayer" parent="." node_paths=PackedStringArray("resume_button", "pause_sfx")]
+process_mode = 3
+layer = 110
+script = ExtResource("5_w64xu")
+resume_button = NodePath("Panel/VBoxContainer/Resume")
+pause_sfx = NodePath("../sfx_pause")
+
+[node name="Panel" type="Panel" parent="PauseMenu"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_84mim")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -145.0
+offset_top = -122.0
+offset_right = 145.0
+offset_bottom = 122.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Resume" type="Button" parent="PauseMenu/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Resume Game
+"
+
+[node name="RestartLevel" type="Button" parent="PauseMenu/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Restart Level"
+
+[node name="Quit" type="Button" parent="PauseMenu/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Quit Game"
+
+[node name="sfx_pause" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_84mim")
+
+[connection signal="pressed" from="PauseMenu/Panel/VBoxContainer/Resume" to="PauseMenu" method="_on_resume_pressed"]
+[connection signal="pressed" from="PauseMenu/Panel/VBoxContainer/RestartLevel" to="PauseMenu" method="_on_restart_level_pressed"]
+[connection signal="pressed" from="PauseMenu/Panel/VBoxContainer/Quit" to="PauseMenu" method="_on_quit_pressed"]

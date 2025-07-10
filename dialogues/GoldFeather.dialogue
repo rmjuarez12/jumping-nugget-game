@@ -1,0 +1,9 @@
+~ start
+do DialogueState._stop_stage_timer()
+do DialogueState._manage_char_movement(false)
+Chickboy: Look at those golden feathers!
+Chickboy: I bet I can fly if I jump when Im on them.
+Chickboy: Let's give it a shot!
+do DialogueState._manage_char_movement(true)
+do DialogueState._start_stage_timer()
+=> END

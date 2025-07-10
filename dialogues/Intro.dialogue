@@ -1,11 +1,10 @@
 ~ start
-Nathan: [[Hi|Hello|Howdy]], this is some dialogue.
-Nathan: Here are some choices.
-- First one
-	Nathan: You picked the first one.
-- Second one
-	Nathan: You picked the second one.
-- Start again => start
-- End the conversation => END
-Nathan: For more information see the online documentation.
+do DialogueState._stop_stage_timer()
+do DialogueState._manage_char_movement(false)
+Chickboy: Those pesky rascals dare steal my golden egg!
+Chickboy: I'll make sure they regret this!
+Chickboy: ... well, once I catch them...
+Chickboy: For now, I shall make haste and chase them.
+do DialogueState._manage_char_movement(true)
+do DialogueState._start_stage_timer()
 => END

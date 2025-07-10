@@ -13,7 +13,7 @@ class_name GroundState
 @export var air_state : State
 
 func state_input(event : InputEvent):
-	if(event.is_action_pressed("jump")):
+	if(event.is_action_pressed("jump") and can_move):
 		jump(event)
 
 func state_process(_delta):

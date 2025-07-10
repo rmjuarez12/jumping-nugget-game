@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://cx0eyvgwtrkhs"
+path="res://.godot/imported/GoldFeather.dialogue-2ab49a473cc06f845f6b3cd996db140d.tres"
+
+[deps]
+
+source_file="res://dialogues/GoldFeather.dialogue"
+dest_files=["res://.godot/imported/GoldFeather.dialogue-2ab49a473cc06f845f6b3cd996db140d.tres"]
+
+[params]
+
+defaults=true
