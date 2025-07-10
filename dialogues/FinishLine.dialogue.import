@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://yu1wujdvn458"
+path="res://.godot/imported/FinishLine.dialogue-7e7b9f9dbbbe2e441fb942d38ed80e13.tres"
+
+[deps]
+
+source_file="res://dialogues/FinishLine.dialogue"
+dest_files=["res://.godot/imported/FinishLine.dialogue-7e7b9f9dbbbe2e441fb942d38ed80e13.tres"]
+
+[params]
+
+defaults=true

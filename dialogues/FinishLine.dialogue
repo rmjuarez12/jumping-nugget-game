@@ -1,0 +1,15 @@
+~ start
+do DialogueState._stop_stage_timer()
+do DialogueState._manage_char_movement(false)
+do DialogueState._fetch_game_data()
+do DialogueState._calculate_performance()
+Stage Cleared: You died {{DialogueState.game_data["deaths"]}} times
+Stage Cleared: You collect {{DialogueState.game_data["gems"]}} out of {{DialogueState.game_data["gems_count"]}}
+Stage Cleared: You completed the stage at {{DialogueState.game_data["time"]}}
+Stage Cleared: Your overall performance is of {{DialogueState.game_performance["overall_performance"]}}%
+Stage Cleared: {{DialogueState._get_final_veredict()}}
+- Restart Level?
+	do DialogueState._restart_stage()
+- Quit... Im disappointed...
+	do DialogueState._exit_game()
+=> END

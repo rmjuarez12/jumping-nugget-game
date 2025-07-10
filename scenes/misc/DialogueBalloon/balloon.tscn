@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://cb0t1u84rve1v"]
+[gd_scene load_steps=14 format=3 uid="uid://cb0t1u84rve1v"]
 
 [ext_resource type="Script" uid="uid://c62j5rssc7brg" path="res://scenes/misc/DialogueBalloon/balloon.gd" id="1_36de5"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
 [ext_resource type="Texture2D" uid="uid://drqd5dbosnwui" path="res://scenes/misc/DialogueBalloon/assets/dialogue-box.png" id="2_s35wn"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_72ixx"]
 [ext_resource type="FontFile" uid="uid://66qim4euxbya" path="res://assets/fonts/Silver.ttf" id="3_y4up3"]
+[ext_resource type="Theme" uid="uid://c5x7iuq1ts4c1" path="res://assets/game_manager.tres" id="6_jf5k6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
 bg_color = Color(0, 0, 0, 1)
@@ -159,6 +160,7 @@ response_template = NodePath("ResponseExample")
 
 [node name="ResponseExample" type="Button" parent="Balloon/ResponsesMenu"]
 layout_mode = 2
+theme = ExtResource("6_jf5k6")
 text = "Response example"
 
 [connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]

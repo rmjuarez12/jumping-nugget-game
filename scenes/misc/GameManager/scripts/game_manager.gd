@@ -20,7 +20,6 @@ extends Node
 @onready var stage_timer: Timer = $StageTimer
 
 func _ready() -> void:
-	print("has reloaded: ", DialogueState.has_reloaded)
 	for i in range(all_gems.get_child_count()):
 		gem_nodes.append(false)
 
@@ -84,7 +83,7 @@ func _on_stage_timer_timeout() -> void:
 
 	var seconds = game_data["timeSecs"]
 
-	if seconds >= 60:
+	if seconds >= 59:
 		game_data["timeMins"] += 1
 		game_data["timeSecs"] = 0
 

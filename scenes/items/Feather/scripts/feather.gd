@@ -5,6 +5,12 @@ extends Area2D
 
 @onready var particles: GPUParticles2D = $GPUParticles2D
 
+func _process(_delta: float) -> void:
+	if not already_used:
+		particles.emitting = true
+	else:
+		particles.emitting = false
+
 func _on_body_entered(body:Node2D) -> void:
 	if (body.name == "MainPlayer" and not already_used):
 		body.state_machine.air_state.can_second_jump = true

@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://omr37v455v33"]
+
+[ext_resource type="Script" uid="uid://ccvmu6x2ju2l7" path="res://scenes/misc/FinishLine/scripts/finish_line.gd" id="1_ed34d"]
+[ext_resource type="Resource" uid="uid://yu1wujdvn458" path="res://dialogues/FinishLine.dialogue" id="2_dyyao"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h12da"]
+
+[node name="FinishLine" type="Area2D"]
+script = ExtResource("1_ed34d")
+dialogue = ExtResource("2_dyyao")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_h12da")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
